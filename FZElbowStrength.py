@@ -54,7 +54,7 @@ with tcol3:  # Place content in the middle column
    #   )
    st.markdown(
     """
-    <div style="background-color:#FFFFC5; padding:10px; border-radius:5px">
+    <div style="background-color:#90EE90; padding:10px; border-radius:5px">
         <strong> Active Range of Motion (AROM) & Elbow Strength Analyzer</strong>   
     </div>
     """,
