@@ -114,7 +114,7 @@ if (not st.session_state.show_sidebar) or (st.session_state.show_sidebar == Fals
    enterdata = st.button("Enter ROM details..")
 
    st.info(
-       'The system analyzes elbow movements Flexion, Extension, Pronation, Supination, and Wrist Extension, integrating pain level to determine Elbow Strength')
+       'This system analyzes elbow movements Flexion, Extension, Pronation, Supination, and Wrist Extension, integrating pain level to determine Elbow Strength')
 
    if enterdata:
     st.session_state.show_sidebar = True
