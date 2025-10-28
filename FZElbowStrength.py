@@ -4,6 +4,9 @@ import skfuzzy as fuzz
 from skfuzzy import control as ctrl
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MultipleLocator
+from streamlit_js_eval import streamlit_js_eval
+from user_agents import parse
+
 
 st.markdown(
     """
@@ -16,6 +19,9 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
+
+
 
 
 
@@ -51,6 +57,7 @@ with tcol2:  # Place content in the middle column
 
 st.write()
 
+
 if (not st.session_state.show_sidebar) or (st.session_state.show_sidebar == False):
 
 #st.markdown(
@@ -58,11 +65,17 @@ if (not st.session_state.show_sidebar) or (st.session_state.show_sidebar == Fals
          #       unsafe_allow_html=True
          #   )
 
+  st.info('Lateral epicondylitis, or tennis elbow, is caused by repetitive strain on elbow tendons, leading to pain, inflammation, and reduced mobility. Severity is often gauged by the range of motion (ROM) in the elbow and wrist.')
+
+  st.info('The system analyzes elbow movements Flexion, Extension, Pronation, Supination, and Wrist Extension, integrating pain level to determine Elbow Strength')
+
+
   col1, col2, col3 = st.columns([1,1,1])
   #elbowStrengthImg = Image.open('images/ElbowStrength.png').resize((5,5))
   #tennisElbowImg = Image.open('images/TennisElbow.png').resize((5,5))
   #col1.image(elbowStrengthImg, caption="Elbow Anatomy", use_container_width=True)
   #col2.image("images/TennisElbow.png", caption="Sample Movement", use_container_width=True)
+
 
   with col1:
       st.image("images/ElbowStrength.png", width=300)
@@ -90,7 +103,7 @@ if (not st.session_state.show_sidebar) or (st.session_state.show_sidebar == Fals
     st.session_state.show_sidebar = True
 
 
-# 3) DEFINE FUZZY VARIABLES & MEMBERSHIP FUNCTIONS ----------------------
+# 3) DEFINE FUZZY   VARIABLES & MEMBERSHIP FUNCTIONS ----------------------
 flexion    = ctrl.Antecedent(np.arange(69, 180, 1),   'Elbow Flexion')
 extension  = ctrl.Antecedent(np.arange(-5,   8,   1), 'Elbow Extension')
 wextension = ctrl.Antecedent(np.arange(20,  75,  1),  'Wrist Extension')
@@ -177,11 +190,11 @@ if st.session_state.show_sidebar:
     # Classify elbow strength
      if output_value is not None:
       if pain_level == 'Severe' or output_value <= 4:
-        elbow_strength = 'Weak'
+        elbow_strength = 'Weak - Limited ROM and/or high pain levels'
       elif output_value <= 8:
-        elbow_strength = 'Average' if pain_level in ('None','Low','Moderate') else 'Weak'
+        elbow_strength = 'Average - Moderate ROM or mild pain interference' if pain_level in ('None','Low','Moderate') else 'Weak'
       else:
-        elbow_strength = 'Good'    if pain_level in ('None','Low','Moderate') else 'Average'
+        elbow_strength = 'Good - High ROM and low pain levels' if pain_level in ('None','Low','Moderate') else 'Average'
      else:
         output_value = 0
         elbow_strength = ''
@@ -190,6 +203,7 @@ if st.session_state.show_sidebar:
 
      with fcol2:  # Place content in the middle column
 
+      st.info('Predicted Elbow Strength Based on Fuzzy Logic Analysis')
       # Main assessment plot
       fig_main, ax_main = plt.subplots(figsize=(4, 2))
 
@@ -208,9 +222,9 @@ if st.session_state.show_sidebar:
       #ax_main.tick_params(axis='x', labelsize=15)
       #ax_main.tick_params(axis='y', labelsize=15)
 
-      ax_main.set_title('Fuzzy AROM Assessment')
-      ax_main.set_xlabel('AROM Value')
-      ax_main.set_ylabel('Membership Degree')
+     # ax_main.set_title('Fuzzy AROM Assessment')
+      ax_main.set_xlabel('Aggregated Range of Motion (ROM) Score (all movements)')
+      ax_main.set_ylabel('Membership Degree in Strength Categories')
       ax_main.legend()
       st.pyplot(fig_main)
 
@@ -226,12 +240,22 @@ if st.session_state.show_sidebar:
        else:
            st.info("Elbow Strength:  " + str(elbow_strength))
     # Tabs for detailed plots
-     tab1, tab2 = st.tabs([
+     tab1, tab2, tab3 = st.tabs([
         "Flexion & Extension",
-        "Pronation / Supination / Wrist Ext."
+        "Pronation / Supination / Wrist Ext.",
+        "Conditions & Movements Glossary"
      ])
 
+     with tab3:
+       st.info('Hypomobility is a condition where one or more joints have a reduced range of motion. Limits flexibility and can make movements like bending, reaching, or rotating difficult. ')
+       st.info('Hypermobility is a condition where joints can bend or stretch more than typical. This often causes joint pain, instability which leads to frequent sprains and dislocations.')
+       st.write()
+       st.info('Elbow flexion: Movement that bends forearm toward upper arm. Every day tasks like eating, lifting, or brushing hair.')
+       st.info('Elbow extension: Movement that straightens the arm by increasing the angle between the forearm and upper arm. It is opposite of flexion and is essential for reaching, pushing, and stabilizing the arm.')
+       st.info('Elbow pronation: Rotational movement of the forearm when turning the palm downward. Daily tasks like typing, turning doorknobs, and using tools.')
+       st.info('Elbow supination: Rotational movement of the forearm when turning the palm upward. Simple tasks like holding a bowl or receiving change. Key motion for functional hand use.')
      with tab1:
+
         fig_fe, (ax_f, ax_e) = plt.subplots(1, 2, figsize=(12, 4))
         # Flexion
         for label in ['Hypomobility','Normal','Hypermobility']:
