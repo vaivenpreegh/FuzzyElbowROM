@@ -4,8 +4,6 @@ import skfuzzy as fuzz
 from skfuzzy import control as ctrl
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MultipleLocator
-from streamlit_js_eval import streamlit_js_eval
-from user_agents import parse
 
 
 st.markdown(
