@@ -221,8 +221,8 @@ if st.session_state.show_sidebar:
       #ax_main.tick_params(axis='y', labelsize=15)
 
      # ax_main.set_title('Fuzzy AROM Assessment')
-      ax_main.set_xlabel('Aggregated Range of Motion (ROM) Score (all movements)')
-      ax_main.set_ylabel('Membership Degree in Strength Categories')
+      ax_main.set_xlabel('Aggregated ROM Score (all movements)')
+      ax_main.set_ylabel('Membership Degree in Strength')
       ax_main.legend()
       st.pyplot(fig_main)
 
