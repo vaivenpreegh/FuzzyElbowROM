@@ -54,7 +54,7 @@ with tcol3:  # Place content in the middle column
    #   )
    st.markdown(
     """
-    <div style="background-color:#90EE90; padding:10px; border-radius:5px">
+    <div style="background-color:#90EE90; padding:10px; border-radius:5px; color:black">
         <strong> Active Range of Motion (AROM) & Elbow Strength Analyzer</strong>   
     </div>
     """,
@@ -75,7 +75,7 @@ if (not st.session_state.show_sidebar) or (st.session_state.show_sidebar == Fals
   #st.info('Lateral epicondylitis, or tennis elbow, is caused by repetitive strain on elbow tendons, leading to pain, inflammation, and reduced mobility. Severity is often gauged by the range of motion (ROM) in the elbow and wrist.')
   st.markdown(
     """
-    <div style="background-color:#90D5FF; padding:10px; border-radius:5px">
+    <div style="background-color:#90D5FF; padding:10px; border-radius:5px; color:black">
         <strong> Lateral epicondylitis or tennis elbow </strong> is caused by repetitive strain on elbow tendons, leading to pain, inflammation, and reduced mobility.<br> Severity is often gauged by the range of motion (ROM) in the elbow and wrist.   
     </div>
     """,
