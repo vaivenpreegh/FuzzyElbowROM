@@ -82,7 +82,6 @@ if (not st.session_state.show_sidebar) or (st.session_state.show_sidebar == Fals
     unsafe_allow_html=True
    )
 
-  st.info('The system analyzes elbow movements Flexion, Extension, Pronation, Supination, and Wrist Extension, integrating pain level to determine Elbow Strength')
 
 
   col1, col2, col3 = st.columns([1,1,1])
@@ -113,6 +112,9 @@ if (not st.session_state.show_sidebar) or (st.session_state.show_sidebar == Fals
      "**Assess Elbow Strength** to analyze elbow health")
 
    enterdata = st.button("Enter ROM details..")
+
+   st.info(
+       'The system analyzes elbow movements Flexion, Extension, Pronation, Supination, and Wrist Extension, integrating pain level to determine Elbow Strength')
 
    if enterdata:
     st.session_state.show_sidebar = True
@@ -224,7 +226,7 @@ if st.session_state.show_sidebar:
 
       plt.rcParams["axes.titlesize"] = 10  # Font size for all axes titles
       plt.rcParams["axes.labelsize"] = 4  # Font size for all axes labels
-      plt.rcParams["xtick.labelsize"] = 6  # Font size for x-tick labels
+      plt.rcParams["xtick.labelsize"] = 4  # Font size for x-tick labels
       plt.rcParams["ytick.labelsize"] = 6  # Font size for y-tick labels
       plt.rcParams["legend.fontsize"] = 6  # Font size for legends
 
@@ -258,7 +260,7 @@ if st.session_state.show_sidebar:
      tab1, tab2, tab3 = st.tabs([
         "Flexion & Extension",
         "Pronation / Supination / Wrist Ext.",
-        "Conditions & Movements Glossary"
+        "Glossary: Conditions & Movements "
      ])
 
      with tab3:
